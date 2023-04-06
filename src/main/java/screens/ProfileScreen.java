@@ -1,33 +1,30 @@
 package screens;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
+import drivers.AndroidDriverManager;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import java.time.Duration;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
-
 public class ProfileScreen {
-    public ProfileScreen(AndroidDriver<AndroidElement> androidDriver) {
-        PageFactory.initElements(new AppiumFieldDecorator(androidDriver, Duration.ofSeconds(30)), this);
-    }
 
-    @AndroidFindBy(xpath = "//*[contains(concat(' ',@content-desc, ' '),' Call Mobile ')]//*[@resource-id='com.android.contacts:id/header']")
-    private AndroidElement phoneText;
+  public ProfileScreen() {
+    PageFactory.initElements(
+        new AppiumFieldDecorator(AndroidDriverManager.getDriver(), Duration.ofSeconds(30)), this);
+  }
 
-    @AndroidFindBy(xpath = "//*[contains(concat(' ',@content-desc, ' '),' Email Home ')]//*[@resource-id='com.android.contacts:id/header']")
-    private AndroidElement emailText;
+  @AndroidFindBy(xpath = "//*[contains(concat(' ',@content-desc, ' '),' Call Mobile ')]//*[@resource-id='com.android.contacts:id/header']")
+  public WebElement phoneText;
 
+  @AndroidFindBy(xpath = "//*[contains(concat(' ',@content-desc, ' '),' Email Home ')]//*[@resource-id='com.android.contacts:id/header']")
+  public WebElement emailText;
 
-    @AndroidFindBy(id = "com.android.contacts:id/editor_menu_save_button")
-    private AndroidElement saveBtn;
+  public String getPhoneText() {
+    return phoneText.getText();
+  }
 
-    public String getPhoneText() {
-        return phoneText.getText();
-    }
-
-    public String getEmailText() {
-        return emailText.getText();
-    }
+  public String getEmailText() {
+    return emailText.getText();
+  }
 }

@@ -6,23 +6,24 @@ import org.testng.annotations.BeforeSuite;
 import server.AppiumServerProvider;
 
 public class BaseTest {
-    @BeforeSuite
-    public void startAppiumServer() {
-        AppiumServerProvider.startAppiumServer();
-    }
 
-    @BeforeClass
-    public void startDriver() {
-        AndroidDriverManager.createDriver();
-    }
+  @BeforeSuite
+  public void startAppiumServer() {
+    AppiumServerProvider.startAppiumServer();
+  }
 
-    @AfterClass
-    public void stopDriver() {
-        AndroidDriverManager.stopDriver();
-    }
+  @BeforeClass
+  public void startDriver() {
+    AndroidDriverManager.createDriver();
+  }
 
-    @AfterSuite
-    public void stopAppiumServer() {
-        AppiumServerProvider.stopAppiumServer();
-    }
+  @AfterClass
+  public void stopDriver() {
+    AndroidDriverManager.stopDriver();
+  }
+
+  @AfterSuite
+  public void stopAppiumServer() {
+    AppiumServerProvider.stopAppiumServer();
+  }
 }
